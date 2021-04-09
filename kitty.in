@@ -81,15 +81,22 @@ validateArguments()
     fi
 }
 
+displayResult()
+{
+    closeVimIfNothingFound='exe !search(".")?"quit!":""'
+    loadExplorerPlugin=':packadd kitty'
+    vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" -
+}
+
 searchFileSystem()
 {
     searchPattern="$1"
 
     if ${SEARCHCONTENT}
     then
-        find . -not -path '*/\.*' -type f -exec grep -nHEs -C 1 ".*${searchPattern}.*" "{}" + | vim "+:packadd kitty" -
+        find . -not -path '*/\.*' -type f -exec grep -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult
     else
-        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | vim "+:packadd kitty" -
+        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult
     fi
 }
 
