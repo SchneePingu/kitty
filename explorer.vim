@@ -5,3 +5,5 @@ function! KittyExplorePath()
   execute vimCommandToOpenPath
 endfunction
 
+nnoremap <c-y> :q!<CR>
+nnoremap <c-x> :call KittyExplorePath()<CR>
