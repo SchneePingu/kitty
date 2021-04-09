@@ -32,12 +32,14 @@ cp ./explorer.vim ~/.vim/pack/plugins/opt/kitty/plugin/explorer.vim
 This way - when the output of kitty is displayed in Vim - the file or directory,
 defined in the line where the cursor is located,
 can be opened by `:call KittyExplorePath()`.
-For convenience, we may add the following key mapping to `~/.vimrc`,
-such that files or directories are opened with `CTRL + x` and closed with `CTRL + y`.
+For convenience, the plugin also provides a key mapping for this,
+such that files or directories may be opened with `CTRL + x` and closed with `CTRL + y`.
+However, this mapping is only applied if not in use already, in order not mess with your setup.
+To setup a custom mapping, add the following to `~/.vimrc` and adapt the keys `<c-x>` and `<c-y>`:
 
 ```bash
-map <c-y> :q!<CR>
 map <c-x> :call KittyExplorePath()<CR>
+map <c-y> :q!<CR>
 ```
 
 # Kitty developer
