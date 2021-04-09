@@ -1,0 +1,69 @@
+.TH kitty(1)
+
+.Sh NAME
+.B kitty
+- search directories, files and file contents for a pattern
+
+.SH SYNOPSIS
+.B kitty
+.I [-c] [-d] [-f] PATTERN
+
+.SH DESCRIPTION
+.B kitty
+searches all directories, files and file contents in the current directory
+- including non-hidden subdirectories -
+for the PATTERN.
+The PATTERN may contain wildcards (*),
+e.g. the PATTERNS 'tt' and 'ki*y' both match 'kitty'.
+The matching directories, files or file contents are displayed in VIM.
+
+.SH OPTIONS
+.B -c
+search file content for
+.I PATTERN
+.PP
+.B -d
+search directory name for
+.I PATTERN
+.PP
+.B -f
+search file name for
+.I PATTERN
+
+.SH EXAMPLES
+.B kitty
+-d bin
+.PP
+Search directories with a name containing 'bin'
+.PP
+.B kitty
+-f log
+.PP
+Search files with a name containing 'log'
+.PP
+.B kitty
+-c sh
+.PP
+Search files containing 'sh'
+
+.SH VIM
+In order to browse conveniently through the matching directories and files,
+kitty provides the following key mapping in VIM.
+
+.B CTRL + x:
+open directory in explorer / open file in vim
+.br
+.B CTRL + y:
+close explorer / close vim
+
+.SH COPYRIGHT
+.PP
+Copyright 2021 Yaubik.
+
+.SH CREDITS
+.PP
+This man page is created by Yaubik.
+
+.SH
+.PP
+Yaubik kitty(1)

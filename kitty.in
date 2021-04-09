@@ -1,0 +1,109 @@
+#!/bin/bash
+
+SCRIPTNAME=$(basename $0)
+FINDTYPEOPTIONS=()
+FINDTYPE=""
+SEARCHCONTENT=false
+ARGUMENTS=()
+NUMBEROFERRORS=0
+
+
+setOption()
+{
+    option=$1
+
+    case ${option} in
+        c ) SEARCHCONTENT=true ;;
+        d ) FINDTYPEOPTIONS+=("d") ;;
+        f ) FINDTYPEOPTIONS+=("f") ;;
+    esac
+}
+
+isValidOption()
+{
+    option=$1
+
+    if [ "${option}" = "?" ]
+    then
+        return 1
+    else
+        return 0
+    fi
+}
+
+parseCommandLineOptions()
+{
+    getoptsValidOptions=":cdf"
+    options=$@
+
+    while getopts ${getoptsValidOptions} option ${options}
+    do
+        if ! isValidOption "${option}"
+        then
+            ((NUMBEROFERRORS++))
+            echo "${SCRIPTNAME}: invalid option '${OPTARG}'" 1>&2
+        else
+            setOption "${option}"
+        fi
+    done
+
+    FINDTYPE="-type "$(echo ${FINDTYPEOPTIONS[@]} | sed 's/ /,/g')
+}
+
+
+parseCommandLineArguments()
+{
+    while [ $# -gt 0 ]
+    do
+        parseCommandLineOptions $@
+
+        shift $(($OPTIND - 1))
+        unset OPTIND
+
+        if [ $# -gt 0 ]
+        then
+            ARGUMENTS+=("$1")
+            shift
+        fi
+    done
+
+    return ${NUMBEROFERRORS}
+}
+
+validateArguments()
+{
+    if [ ${#ARGUMENTS[@]} -eq 0 ]
+    then
+        echo "${SCRIPTNAME}: Usage: ${SCRIPTNAME} [-c -d -f] NAME"
+        return 1
+    else
+        return 0
+    fi
+}
+
+searchFileSystem()
+{
+    searchPattern="$1"
+
+    if ${SEARCHCONTENT}
+    then
+        find . -not -path '*/\.*' -type f -exec grep -nHEs -C 1 ".*${searchPattern}.*" "{}" + | vim -
+    else
+        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | vim -
+    fi
+}
+
+
+parseCommandLineArguments $@
+if [ $? -gt 0 ]
+then
+    exit 1
+fi
+
+validateArguments
+if [ $? -gt 0 ]
+then
+    exit 1
+fi
+
+searchFileSystem "${ARGUMENTS[0]}"
