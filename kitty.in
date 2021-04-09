@@ -85,7 +85,7 @@ displayResult()
 {
     closeVimIfNothingFound='exe !search(".")?"quit!":""'
     loadExplorerPlugin=':packadd kitty'
-    vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" -
+    vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
 }
 
 searchFileSystem()
