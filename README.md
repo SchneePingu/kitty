@@ -1,4 +1,17 @@
-# Kitty installation
+## What is Kitty?
+
+Kitty is a command line tool (bash script) to search the current directory - including all non-hidden subdirectories - for directories, files and file contents matching a name.
+
+## Kitty usage
+
+Kitty is executed the following way
+```bash
+kitty [-c -d -f] NAME
+```
+where `NAME` specifies the pattern to search for.
+To search for directories use the option `-d`, to search for files use the option `-f`, and to search for file contents use the option `-c`. Notice that the options `-d` and `-f` can be used simultaneously, while the option `-c` has a higher precedence.
+
+## Kitty installation
 
 To install `kitty`, download the release archive `kitty-*.tar.gz`, extract it with `tar -xvf kitty-*.tar.gz`, change directory to `kitty-*` and run the following commands:
 
@@ -17,7 +30,7 @@ make install
 
 Take care for this directory to be covered by the `PATH` environment variable!
 
-# Vim(8) plugin
+## Vim(8) plugin
 
 Kitty provides a plugin for Vim 8 to navigate through its output.
 To install it, we use Vim's native pack system and make `kitty` an optional package.
@@ -42,7 +55,7 @@ map <c-x> :call KittyExplorePath()<CR>
 map <c-y> :q!<CR>
 ```
 
-# Kitty developer
+## Kitty developer
 
 Kitty is configured with `autotools`, that is `autoconf` and `automake`.
 To create a release for kitty, just run the bash script `deploy.sh`.
