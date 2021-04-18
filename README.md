@@ -13,22 +13,21 @@ To search for directories use the option `-d`, to search for files use the optio
 
 ## Kitty installation
 
-To install `kitty`, download the release archive `kitty-*.tar.gz`, extract it with `tar -xvf kitty-*.tar.gz`, change directory to `kitty-*` and run the following commands:
+To install `kitty` to `$HOME/.local`, you may use the following command:
 
 ```bash
-./configure
-make install
+curl -L https://www.github.com/yaubik/kitty/releases/download/v1.1/kitty-1.1.tar.gz \
+| tar -xz \
+&& cd kitty-1.1/ \
+&& ./configure --prefix="$HOME/.local" \
+&& make install \
+&& cd .. \
+&& rm -rf kitty-1.1
 ```
 
-Notice, that by default this requires root privileges!
-To install `kitty` locally without root privileges use the `--prefix` option to specify an installation directory, for instance:
-
-```bash
-./configure --prefix="$HOME/.local"
-make install
-```
-
-Take care for this directory to be covered by the `PATH` environment variable!
+If you want to install `kitty` to a directory other than `$HOME/.local`, please adapt the path specified by the `--prefix` option.
+Take care for this path to be covered by the `PATH` environment variable!
+For a system-wide installation, you may want to remove the `--prefix` option at all.
 
 ## Vim(8) plugin
 
