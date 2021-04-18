@@ -29,6 +29,7 @@ class Test_Helper():
 
     def run_kitty(self, *args):
         kitty_arguments = list(args)
-        search_result = subprocess.run([self.path_to_kitty_executable] + kitty_arguments, stdout=subprocess.PIPE).stdout.decode('utf-8')
+        search_result = subprocess.run([self.path_to_kitty_executable] + kitty_arguments, stdout=subprocess.PIPE) \
+            .stdout.decode('utf-8').strip().split(os.linesep)
 
         return search_result

@@ -9,22 +9,22 @@ class Kitty_Test(unittest.TestCase):
         
     def test_file_search(self):
         actual_search_result = self.test_helper.run_kitty('-f', 'Mouse')
-        expected_search_result = './firstMouse.txt\n./mousehole/secondMouse.txt\n'
+        expected_search_result = ['./firstMouse.txt', './mousehole/secondMouse.txt']
 
-        self.assertEqual(actual_search_result, expected_search_result)
+        self.assertCountEqual(actual_search_result, expected_search_result)
 
     def test_directory_search(self):
         actual_search_result = self.test_helper.run_kitty('-d', 'hole')
-        expected_search_result = './mousehole\n'
+        expected_search_result = ['./mousehole']
 
-        self.assertEqual(actual_search_result, expected_search_result)
+        self.assertCountEqual(actual_search_result, expected_search_result)
 
     def test_file_content_search(self):
         actual_search_result = self.test_helper.run_kitty('-c', 'mouse')
         self.maxDiff = None
-        expected_search_result = './firstMouse.txt:1:This is the first mouse to catch.\n--\n./mousehole/secondMouse.txt:1:This is the second mouse to catch.\n'
+        expected_search_result = ['./firstMouse.txt:1:This is the first mouse to catch.', '--', './mousehole/secondMouse.txt:1:This is the second mouse to catch.']
 
-        self.assertEqual(actual_search_result, expected_search_result)
+        self.assertCountEqual(actual_search_result, expected_search_result)
 
 
 if __name__ == '__main__':
