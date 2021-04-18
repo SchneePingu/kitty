@@ -16,15 +16,15 @@ To search for directories use the option `-d`, to search for files use the optio
 To install `kitty` to `$HOME/.local`, you may use the following command:
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.1/kitty-1.1.tar.gz \
+curl -L https://www.github.com/yaubik/kitty/releases/download/v1.2/kitty-1.2.tar.gz \
 | tar -xz \
-&& cd kitty-1.1/ \
+&& cd kitty-1.2/ \
 && ./configure --prefix="$HOME/.local" \
 && make install \
 && mkdir -p $HOME/.vim/pack/plugins/opt/kitty/plugin \
 && cp explorer.vim $HOME/.vim/pack/plugins/opt/kitty/plugin/explorer.vim \
 && cd .. \
-&& rm -rf kitty-1.1
+&& rm -rf kitty-1.2
 ```
 
 If you want to install `kitty` to a directory other than `$HOME/.local`, please adapt the path specified by the `--prefix` option.

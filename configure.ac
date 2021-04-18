@@ -1,4 +1,4 @@
-AC_INIT([kitty], [1.1])
+AC_INIT([kitty], [1.2])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_PATH_PROG([GREP], [grep], [nogrep])
