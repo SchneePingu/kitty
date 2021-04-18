@@ -4,7 +4,7 @@ AM_INIT_AUTOMAKE([foreign])
 AC_PATH_PROG([GREP], [grep], [nogrep])
 if test "$GREP" = nogrep
 then
-   AC_MSG_ERROR(['Grep' installation cannot be found])
+   AC_MSG_ERROR(['grep' installation cannot be found])
 fi
 
 AC_PATH_PROG([SED], [sed], [nosed])
@@ -20,6 +20,4 @@ then
 fi
 
 AC_CONFIG_FILES([Makefile])
-AC_CONFIG_FILES([kitty], [chmod +x kitty])
-AC_CONFIG_FILES([kitty.man])
 AC_OUTPUT
