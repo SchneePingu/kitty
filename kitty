@@ -4,6 +4,7 @@ SCRIPTNAME=$(basename $0)
 FINDTYPEOPTIONS=()
 FINDTYPE=""
 SEARCHCONTENT=false
+DISPLAYINVIM=false
 ARGUMENTS=()
 NUMBEROFERRORS=0
 
@@ -16,6 +17,7 @@ setOption()
         c ) SEARCHCONTENT=true ;;
         d ) FINDTYPEOPTIONS+=("d") ;;
         f ) FINDTYPEOPTIONS+=("f") ;;
+        v ) DISPLAYINVIM=true ;;
     esac
 }
 
@@ -33,7 +35,7 @@ isValidOption()
 
 parseCommandLineOptions()
 {
-    getoptsValidOptions=":cdf"
+    getoptsValidOptions=":cdfv"
     options=$@
 
     while getopts ${getoptsValidOptions} option ${options}
@@ -74,7 +76,7 @@ validateArguments()
 {
     if [ ${#ARGUMENTS[@]} -eq 0 ]
     then
-        echo "${SCRIPTNAME}: Usage: ${SCRIPTNAME} [-c -d -f] NAME"
+        echo "${SCRIPTNAME}: Usage: ${SCRIPTNAME} [-v] [-c -d -f] NAME"
         return 1
     else
         return 0
@@ -83,9 +85,14 @@ validateArguments()
 
 displayResult()
 {
-    closeVimIfNothingFound='exe !search(".")?"quit!":""'
-    loadExplorerPlugin=':packadd kitty'
-    vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
+    if ${DISPLAYINVIM}
+    then
+        closeVimIfNothingFound='exe !search(".")?"quit!":""'
+        loadExplorerPlugin=':packadd kitty'
+        vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
+    else
+        cat
+    fi
 }
 
 searchFileSystem()
