@@ -17,3 +17,5 @@ jobs:
 
       - name: Deploy kitty
         run: ./deploy.sh
+      - name: Install kitty
+        run: tar -xzf kitty-1.2.tar.gz && cd kitty-1.2/ && ./configure --prefix="$HOME/.local" && make install && mkdir -p $HOME/.vim/pack/plugins/opt/kitty/plugin && cp explorer.vim $HOME/.vim/pack/plugins/opt/kitty/plugin/explorer.vim && cd .. && rm -rf kitty-1.2
