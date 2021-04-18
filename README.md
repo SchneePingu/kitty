@@ -17,15 +17,15 @@ To display the result in VIM, use the option `-v`.
 To install `kitty` to `$HOME/.local`, you may use the following command:
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.2/kitty-1.2.tar.gz \
+curl -L https://www.github.com/yaubik/kitty/releases/download/v1.3/kitty-1.3.tar.gz \
 | tar -xz \
-&& cd kitty-1.2/ \
+&& cd kitty-1.3/ \
 && ./configure --prefix="$HOME/.local" \
 && make install \
 && mkdir -p $HOME/.vim/pack/plugins/opt/kitty/plugin \
 && cp explorer.vim $HOME/.vim/pack/plugins/opt/kitty/plugin/explorer.vim \
 && cd .. \
-&& rm -rf kitty-1.2
+&& rm -rf kitty-1.3
 ```
 
 If you want to install `kitty` to a directory other than `$HOME/.local`, please adapt the path specified by the `--prefix` option.
