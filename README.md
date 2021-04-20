@@ -51,7 +51,7 @@ map <c-y> :q!<CR>
 
 #### Deployment
 
-`Kitty` is configured with `autotools`, that is `autoconf` and `automake`.
+`Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
 To create a release for `kitty`, just execute the bash script `deploy.sh`.
 This will create a `tar.gz` archive ready for distribution.
 
