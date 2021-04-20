@@ -20,7 +20,7 @@ class Test_Helper():
         return path_to_test_file_system
 
     def __get_path_to_kitty_executable(self):
-        path_to_kitty_executable = os.path.join(self.path_to_tests_directory, '..', 'kitty')
+        path_to_kitty_executable = os.path.join(self.path_to_tests_directory, '..', 'sh' ,'kitty')
 
         return path_to_kitty_executable
 
