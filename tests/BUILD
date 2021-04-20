@@ -7,5 +7,5 @@ py_test(
 py_library(
     name = "TestHelper",
     srcs = ["py/TestHelper.py"],
-    data = ["data"],
+    data = ["data", "@kitty//sh:Kitty"],
 )
