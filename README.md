@@ -51,11 +51,11 @@ map <c-y> :q!<CR>
 
 #### Deployment
 
-`Kitty` is configured with `autotools`, that is `autoconf` and `automake`.
+`Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
 To create a release for `kitty`, just execute the bash script `deploy.sh`.
 This will create a `tar.gz` archive ready for distribution.
 
 #### System tests
 
 `Kitty` is tested with Python 3 by means of the `unittest` module.
-The tests are located in the `tests` directory and are executed by the bash script `test.sh`.
+The tests are located in the `tests` directory and are executed by the bazel command `./bazelisk test @kitty//tests:SystemTests`
