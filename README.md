@@ -58,4 +58,4 @@ This will create a `tar.gz` archive ready for distribution.
 #### System tests
 
 `Kitty` is tested with Python 3 by means of the `unittest` module.
-The tests are located in the `tests` directory and are executed by the bash script `test.sh`.
+The tests are located in the `tests` directory and are executed by the bazel command `./bazelisk test @kitty//tests:SystemTests`
