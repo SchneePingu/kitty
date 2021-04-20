@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Test kitty
-        run: ./test.sh
+        run: ./bazelisk test @kitty//tests:SystemTests
       - name: Deploy kitty
         run: ./deploy.sh
       - name: Install kitty

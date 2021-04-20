@@ -1,10 +1,10 @@
 import unittest
-import Test_Helper
+import TestHelper
 
 
 class Kitty_Test(unittest.TestCase):
     def setUp(self):
-        self.test_helper = Test_Helper.Test_Helper()
+        self.test_helper = TestHelper.Test_Helper()
         self.test_helper.change_to_test_file_system()
         
     def test_file_search(self):

@@ -9,12 +9,12 @@ class Test_Helper():
         self.path_to_kitty_executable = self.__get_path_to_kitty_executable()
 
     def __get_path_to_tests_directory(self):
-        path_to_tests_directory = os.path.dirname(__file__)
+        path_to_tests_directory = os.path.join(os.path.dirname(__file__), '..')
 
         return path_to_tests_directory
 
     def __get_path_to_test_file_system(self):
-        name_of_test_file_system = 'testFileSystem'
+        name_of_test_file_system = 'data'
         path_to_test_file_system = os.path.join(self.path_to_tests_directory, name_of_test_file_system)
 
         return path_to_test_file_system
