@@ -9,6 +9,7 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Notable Changes
 
+* `Kitty` no longer requires a `sed` installation.
 * A `CHANGELOG` has been introduced.
 * `Kitty` is now build and tested with `bazel 4.0.0`.
 
