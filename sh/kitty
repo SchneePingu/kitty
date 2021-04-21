@@ -100,9 +100,15 @@ searchFileSystem()
 {
     searchPattern="$1"
 
+    colorOption="--color=always"
+    if ${DISPLAYINVIM} && [ ! -z "$(which vim)" ]
+    then
+        colorOption=""
+    fi
+
     if ${SEARCHCONTENT}
     then
-        find . -not -path '*/\.*' -type f -exec grep -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult
+        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult
     else
         find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult
     fi
