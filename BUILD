@@ -1,6 +1,8 @@
+load('@kitty//:version.bzl', 'VERSION')
+
 filegroup(
     name = "KittyRelease",
-    srcs = ["kitty-1.3.tar.gz"]
+    srcs = ["kitty-{}.tar.gz".format(VERSION)]
 )
 
 genrule(
@@ -12,7 +14,7 @@ genrule(
         "@kitty//man:Manpage",
         "@kitty//vim:Plugin",
     ],
-    outs = ["kitty-1.3.tar.gz"],
+    outs = ["kitty-{}.tar.gz".format(VERSION)],
     cmd_bash = """
     cp $(locations @kitty//autotools:AutotoolsResources) .
     aclocal
@@ -20,8 +22,8 @@ genrule(
     automake --add-missing
     ./configure
     make distcheck
-    mv kitty-latest.tar.gz $@
-    """,
+    mv kitty-{version}.tar.gz $@
+    """.format(version=VERSION),
 )
 
 filegroup(

@@ -1,3 +1,5 @@
+load('@kitty//:version.bzl', 'VERSION')
+
 filegroup(
     name = "AutotoolsResources",
     srcs = [
@@ -24,14 +26,14 @@ genrule(
     cmd_bash = """
 cat << EOF > $@
 
-AC_INIT([kitty], [latest])
+AC_INIT([kitty], [{version}])
 AM_INIT_AUTOMAKE([foreign])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
 EOF
-    """,
+    """.format(version=VERSION),
 )
 
 genrule(
