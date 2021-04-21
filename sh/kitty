@@ -49,7 +49,7 @@ parseCommandLineOptions()
         fi
     done
 
-    FINDTYPE="-type "$(echo ${FINDTYPEOPTIONS[@]} | sed 's/ /,/g')
+    FINDTYPE="-type "$(echo ${FINDTYPEOPTIONS[@]} | tr ' ' ',')
 }
 
 
