@@ -85,11 +85,12 @@ validateArguments()
 
 displayResult()
 {
-    if ${DISPLAYINVIM}
+    vimExecutable=$(which vim)
+    if ${DISPLAYINVIM} && [ ! -z "${vimExecutable}" ]
     then
         closeVimIfNothingFound='exe !search(".")?"quit!":""'
         loadExplorerPlugin=':packadd kitty'
-        vim +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
+        ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
     else
         cat
     fi
