@@ -1,5 +1,6 @@
 import subprocess
 import os
+import re
 
 
 class Test_Helper():
@@ -13,6 +14,11 @@ class Test_Helper():
         search_result = subprocess.run([self._path_to_kitty] + kitty_arguments, \
             stdout=subprocess.PIPE, \
             cwd=self._path_to_data) \
-            .stdout.decode('utf-8').strip().split(os.linesep)
+            .stdout.decode('utf-8').strip()
 
-        return search_result
+        return self.remove_ansi_color_escape_codes(search_result).split(os.linesep)
+
+    @staticmethod
+    def remove_ansi_color_escape_codes(search_result):
+        ansi_color_escape_codes = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
+        return ansi_color_escape_codes.sub('', search_result)
