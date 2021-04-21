@@ -7,12 +7,14 @@ genrule(
     name = "MakeKitty",
     srcs = [
         "@kitty//sh:Kitty",
-        "@kitty//:AutotoolsResources",
+        "@kitty//autotools:AutotoolsResources",
         "@kitty//:Documentation",
-        "@kitty//:VimPlugin",
+        "@kitty//man:Manpage",
+        "@kitty//vim:Plugin",
     ],
     outs = ["kitty-1.3.tar.gz"],
     cmd_bash = """
+    cp $(locations @kitty//autotools:AutotoolsResources) .
     aclocal
     autoconf
     automake --add-missing
@@ -23,23 +25,10 @@ genrule(
 )
 
 filegroup(
-    name = "AutotoolsResources",
-    srcs = [
-        "configure.ac",
-        "Makefile.am"
-    ],
-)
-
-filegroup(
     name = "Documentation",
     srcs = [
         "README.md",
         "LICENSE.md",
-        "kitty.man",
     ],
-)
-
-filegroup(
-    name = "VimPlugin",
-    srcs = ["explorer.vim"],
+    visibility = ["//visibility:public"]
 )
