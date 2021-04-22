@@ -13,9 +13,11 @@ genrule(
         "@kitty//:Documentation",
         "@kitty//man:Manpage",
         "@kitty//vim:Plugin",
+        "@kitty//:Installer"
     ],
     outs = ["kitty-{}.tar.gz".format(VERSION)],
     cmd_bash = """
+cp $(location @kitty//:Installer) .
 cp $(locations @kitty//autotools:AutotoolsResources) .
 aclocal
 autoconf
