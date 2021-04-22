@@ -16,14 +16,14 @@ genrule(
     ],
     outs = ["kitty-{}.tar.gz".format(VERSION)],
     cmd_bash = """
-    cp $(locations @kitty//autotools:AutotoolsResources) .
-    aclocal
-    autoconf
-    automake --add-missing
-    ./configure
-    make distcheck
-    mv kitty-{version}.tar.gz $@
-    """.format(version=VERSION),
+cp $(locations @kitty//autotools:AutotoolsResources) .
+aclocal
+autoconf
+automake --add-missing
+./configure
+make distcheck
+mv kitty-{version}.tar.gz $@
+""".format(version=VERSION),
 )
 
 filegroup(
@@ -35,3 +35,26 @@ filegroup(
     ],
     visibility = ["//visibility:public"]
 )
+
+filegroup(
+    name = "Installer",
+    srcs = [":InstallKitty"],
+    visibility = ["//visibility:public"],
+)
+
+genrule(
+    name = "InstallKitty",
+    srcs = [
+        "@kitty//vim:Plugin",
+    ],
+    outs = ["install-kitty.sh"],
+    cmd_bash = """
+cat << EOF > $@
+./configure --prefix="~/.local"
+make install
+mkdir -p "~/.vim/pack/plugins/opt/kitty/plugin"
+cp $(location @kitty//vim:Plugin) "~.vim/pack/plugins/opt/kitty/plugin/$$(basename $(location @kitty//vim:Plugin))"
+EOF
+""",
+)
+
