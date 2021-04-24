@@ -13,3 +13,4 @@ endfunction
 
 nnoremap <c-y> :q!<CR>
 nnoremap <c-x> :call KittyGoToSelectedFile()<CR>
+nnoremap <silent> <c-@> :silent! call KittyGoToNextSearchResult()<CR>
