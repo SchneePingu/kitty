@@ -11,7 +11,7 @@ NUMBEROFERRORS=0
 
 setOption()
 {
-    option=$1
+    local option=$1
 
     case ${option} in
         c ) SEARCHCONTENT=true ;;
@@ -23,7 +23,7 @@ setOption()
 
 isValidOption()
 {
-    option=$1
+    local option=$1
 
     if [ "${option}" = "?" ]
     then
@@ -35,8 +35,8 @@ isValidOption()
 
 parseCommandLineOptions()
 {
-    getoptsValidOptions=":cdfv"
-    options=$@
+    local getoptsValidOptions=":cdfv"
+    local options=$@
 
     while getopts ${getoptsValidOptions} option ${options}
     do
@@ -85,15 +85,15 @@ validateArguments()
 
 displayResult()
 {
-    searchPattern="$1"
+    local searchPattern="$1"
 
-    vimExecutable=$(which vim)
+    local vimExecutable=$(which vim)
     if ${DISPLAYINVIM} && [ ! -z "${vimExecutable}" ]
     then
-        closeVimIfNothingFound='exe !search(".")?"quit!":""'
-        loadExplorerPlugin=':packadd kitty'
-        defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
-        moveToFirstSearchResult=":call KittyGoToNextSearchResult()"
+        local closeVimIfNothingFound='exe !search(".")?"quit!":""'
+        local loadExplorerPlugin=':packadd kitty'
+        local defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
+        local moveToFirstSearchResult=":call KittyGoToNextSearchResult()"
         ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" "+${defineSearchPattern}" "+${moveToFirstSearchResult}" - --not-a-term
     else
         cat
@@ -102,9 +102,9 @@ displayResult()
 
 searchFileSystem()
 {
-    searchPattern="$1"
+    local searchPattern="$1"
 
-    colorOption="--color=always"
+    local colorOption="--color=always"
     if ${DISPLAYINVIM} && [ ! -z "$(which vim)" ]
     then
         colorOption=""
