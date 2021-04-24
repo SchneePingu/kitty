@@ -2,7 +2,7 @@
 
 SCRIPTNAME=$(basename $0)
 FINDTYPEOPTIONS=()
-FINDTYPE=""
+FINDTYPE=''
 SEARCHCONTENT=false
 DISPLAYINVIM=false
 ARGUMENTS=()
@@ -15,8 +15,8 @@ setOption()
 
     case ${option} in
         c ) SEARCHCONTENT=true ;;
-        d ) FINDTYPEOPTIONS+=("d") ;;
-        f ) FINDTYPEOPTIONS+=("f") ;;
+        d ) FINDTYPEOPTIONS+=('d') ;;
+        f ) FINDTYPEOPTIONS+=('f') ;;
         v ) DISPLAYINVIM=true ;;
     esac
 }
@@ -25,7 +25,7 @@ isValidOption()
 {
     local option=$1
 
-    if [ "${option}" = "?" ]
+    if [ "${option}" = '?' ]
     then
         return 1
     else
@@ -35,7 +35,7 @@ isValidOption()
 
 parseCommandLineOptions()
 {
-    local getoptsValidOptions=":cdfv"
+    local getoptsValidOptions=':cdfv'
     local options=$@
 
     while getopts ${getoptsValidOptions} option ${options}
@@ -93,7 +93,7 @@ displayResult()
         local closeVimIfNothingFound='exe !search(".")?"quit!":""'
         local loadExplorerPlugin=':packadd kitty'
         local defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
-        local moveToFirstSearchResult=":call KittyGoToNextSearchResult()"
+        local moveToFirstSearchResult=':call KittyGoToNextSearchResult()'
         ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" "+${defineSearchPattern}" "+${moveToFirstSearchResult}" - --not-a-term
     else
         cat
@@ -104,15 +104,15 @@ searchFileSystem()
 {
     local searchPattern="$1"
 
-    local colorOption="--color=always"
+    local colorOption='--color=always'
     if ${DISPLAYINVIM} && [ ! -z "$(which vim)" ]
     then
-        colorOption=""
+        colorOption=''
     fi
 
     if ${SEARCHCONTENT}
     then
-        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult ${searchPattern}
+        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" '{}' + | displayResult ${searchPattern}
     else
         find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult ${searchPattern}
     fi
