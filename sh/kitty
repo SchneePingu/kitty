@@ -85,12 +85,16 @@ validateArguments()
 
 displayResult()
 {
+    searchPattern="$1"
+
     vimExecutable=$(which vim)
     if ${DISPLAYINVIM} && [ ! -z "${vimExecutable}" ]
     then
         closeVimIfNothingFound='exe !search(".")?"quit!":""'
         loadExplorerPlugin=':packadd kitty'
-        ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" - --not-a-term
+        defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
+        moveToFirstSearchResult=":call KittyGoToNextSearchResult()"
+        ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" "+${defineSearchPattern}" "+${moveToFirstSearchResult}" - --not-a-term
     else
         cat
     fi
@@ -108,9 +112,9 @@ searchFileSystem()
 
     if ${SEARCHCONTENT}
     then
-        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult
+        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" "{}" + | displayResult ${searchPattern}
     else
-        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult
+        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult ${searchPattern}
     fi
 }
 
