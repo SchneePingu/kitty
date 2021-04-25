@@ -15,4 +15,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: System tests
-        run: ./bazelisk test @kitty//tests:SystemTests
+        run: ./bazelisk run @kitty//tests:SystemTests
