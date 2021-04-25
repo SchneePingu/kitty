@@ -1,24 +1,116 @@
 #!/usr/bin/env bash
 
-SCRIPTNAME=$(basename $0)
-FINDTYPEOPTIONS=()
-FINDTYPE=''
-SEARCHCONTENT=false
-DISPLAYINVIM=false
-ARGUMENTS=()
-NUMBEROFERRORS=0
+#TODO: Split into multiple files
+main()
+{
+    scriptName=$(basename $0)
 
+    arguments=$@
+    parseCommandLineArguments ${arguments}
+    if hasError $?
+    then
+        exit 1
+    fi
+
+    searchPattern="${argumentsWithoutOptions[0]}"
+    searchFileSystemForPattern ${searchPattern}
+}
+
+parseCommandLineArguments()
+{
+    local exitCode=0
+
+    initalizeCommandLineArguments
+
+    local arguments=$@
+    while hasArguments ${arguments}
+    do
+        parseCommandLineOptions ${arguments}
+        exitCode=$?
+
+        local numberOfParsedOptions=$(($OPTIND - 1))
+        # remove parsed options from arguments
+        shift ${numberOfParsedOptions}
+        unset OPTIND
+
+        nextArgument="$1"
+        argumentsWithoutOptions+=(${nextArgument})
+        # remove next argument from arguments
+        shift
+
+        arguments=$@
+    done
+
+    if ! hasSearchPattern ${argumentsWithoutOptions}
+    then
+        echo "${scriptName}: missing search pattern" 1>&2
+    fi
+
+    return ${exitCode}
+}
+
+initalizeCommandLineArguments()
+{
+    fileTypeOptions=()
+    argumentsWithoutOptions=()
+    searchFileContent=false
+    displaySearchResultInVim=false
+}
+
+hasArguments()
+{
+    if [ $# -gt 0 ]
+    then
+        true
+    else
+        false
+    fi
+}
+
+parseCommandLineOptions()
+{
+    local exitCode=0
+
+    local optstring=$(getOptstringForGetopts)
+    local arguments=$@
+
+    while getopts ${optstring} option ${arguments}
+    do
+        setOption ${option}
+        exitCode=$?
+    done
+
+    return ${exitCode}
+}
+
+getOptstringForGetopts()
+{
+    local noErrorMessageFromGetopts=':'
+    local listOfValidOptions="cdfv"
+
+    local optstring=${noErrorMessageFromGetopts}${listOfValidOptions}
+    echo ${optstring}
+}
 
 setOption()
 {
     local option=$1
 
+    if ! isValidOption "${option}"
+    then
+        local invalidOption=${OPTARG}
+        echo "${scriptName}: invalid option '${invalidOption}'" 1>&2
+        return 1
+    fi
+
     case ${option} in
-        c ) SEARCHCONTENT=true ;;
-        d ) FINDTYPEOPTIONS+=('d') ;;
-        f ) FINDTYPEOPTIONS+=('f') ;;
-        v ) DISPLAYINVIM=true ;;
+        c ) searchFileContent=true ;;
+        d ) fileTypeOptions+=('d') ;;
+        f ) fileTypeOptions+=('f') ;;
+        v ) displaySearchResultInVim=true ;;
     esac
+
+    return 0
 }
 
 isValidOption()
@@ -33,102 +125,111 @@ isValidOption()
     fi
 }
 
-parseCommandLineOptions()
+hasSearchPattern()
 {
-    local getoptsValidOptions=':cdfv'
-    local options=$@
-
-    while getopts ${getoptsValidOptions} option ${options}
-    do
-        if ! isValidOption "${option}"
-        then
-            ((NUMBEROFERRORS++))
-            echo "${SCRIPTNAME}: invalid option '${OPTARG}'" 1>&2
-        else
-            setOption "${option}"
-        fi
-    done
-
-    FINDTYPE="-type "$(echo ${FINDTYPEOPTIONS[@]} | tr ' ' ',')
-}
-
-
-parseCommandLineArguments()
-{
-    while [ $# -gt 0 ]
-    do
-        parseCommandLineOptions $@
-
-        shift $(($OPTIND - 1))
-        unset OPTIND
-
-        if [ $# -gt 0 ]
-        then
-            ARGUMENTS+=("$1")
-            shift
-        fi
-    done
-
-    return ${NUMBEROFERRORS}
-}
-
-validateArguments()
-{
-    if [ ${#ARGUMENTS[@]} -eq 0 ]
+    arguments=$@
+    if hasArguments ${arguments}
     then
-        echo "${SCRIPTNAME}: Usage: ${SCRIPTNAME} [-v] [-c -d -f] NAME"
-        return 1
+        true
     else
-        return 0
+        false
     fi
 }
 
-displayResult()
+hasError()
+{
+    exitCode=$?
+    if [ ${exitCode} -gt 0 ]
+    then
+        true
+    else
+        false
+    fi
+}
+
+searchFileSystemForPattern()
 {
     local searchPattern="$1"
+    local startAtCurrentDirectory='.'
+    local excludeHiddenDirectoriesFromSearch='-not -path "*/\.*"'
+    local specifyFileTypes='-type '$(getListOfFileTypes)
 
-    local vimExecutable=$(which vim)
-    if ${DISPLAYINVIM} && [ ! -z "${vimExecutable}" ]
+    # This construct is not looking clean,
+    # but refactoring the '-exec' and '-name' options causes issues,
+    # due to the wildcards being extended by bash.
+    if ${searchFileContent}
     then
-        local closeVimIfNothingFound='exe !search(".")?"quit!":""'
-        local loadExplorerPlugin=':packadd kitty'
+        local colorOption=$(getColorOptionForGrep)
+        find    ${startAtCurrentDirectory} \
+                ${excludeHiddenDirectoriesFromSearch} \
+                ${specifyFileTypes} \
+                -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" {} +
+    else
+        find    ${startAtCurrentDirectory} \
+                ${excludeHiddenDirectoriesFromSearch} \
+                ${specifyFileTypes} \
+                -name "*${searchPattern}*"
+    fi | displaySearchResult ${searchPattern}
+}
+
+getListOfFileTypes()
+{
+    if ${searchFileContent}
+    then
+        echo 'f'
+    else
+        echo $(echo ${fileTypeOptions[@]} | replaceWhitespaceByComma)
+    fi
+}
+
+replaceWhitespaceByComma()
+{
+    tr ' ' ','
+}
+
+getColorOptionForGrep()
+{
+    local colorOption='--color=always'
+
+    if ${displaySearchResultInVim} && hasVimInstallation
+    then
+        colorOption=''
+    fi
+
+    echo ${colorOption}
+}
+
+hasVimInstallation()
+{
+    if [[ -z "$(which vim)" ]]
+    then
+        false
+    else
+        true
+    fi
+}
+
+displaySearchResult()
+{
+    if ${displaySearchResultInVim} && hasVimInstallation
+    then
+        local closeVimIfEmptySearchResult='exe !search(".")?"quit!":""'
+        local loadKittyVimPlugin=':packadd kitty'
+        local searchPattern="$1"
         local defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
-        local moveToFirstSearchResult=':call KittyGoToNextSearchResult()'
-        ${vimExecutable} +"${closeVimIfNothingFound}" +"${loadExplorerPlugin}" "+${defineSearchPattern}" "+${moveToFirstSearchResult}" - --not-a-term
+        local moveCursorToFirstSearchResult=':call KittyGoToNextSearchResult()'
+        local suppressReadingFromStdinMessage='--not-a-term'
+
+        vim "+${closeVimIfEmptySearchResult}"\
+            "+${loadKittyVimPlugin}" \
+            "+${defineSearchPattern}" \
+            "+${moveCursorToFirstSearchResult}" \
+            "${suppressReadingFromStdinMessage}" \
+            -
     else
         cat
     fi
 }
 
-searchFileSystem()
-{
-    local searchPattern="$1"
 
-    local colorOption='--color=always'
-    if ${DISPLAYINVIM} && [ ! -z "$(which vim)" ]
-    then
-        colorOption=''
-    fi
-
-    if ${SEARCHCONTENT}
-    then
-        find . -not -path '*/\.*' -type f -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" '{}' + | displayResult ${searchPattern}
-    else
-        find . -not -path '*/\.*' ${FINDTYPE} -name "*${searchPattern}*" | displayResult ${searchPattern}
-    fi
-}
-
-
-parseCommandLineArguments $@
-if [ $? -gt 0 ]
-then
-    exit 1
-fi
-
-validateArguments
-if [ $? -gt 0 ]
-then
-    exit 1
-fi
-
-searchFileSystem "${ARGUMENTS[0]}"
+main $@
