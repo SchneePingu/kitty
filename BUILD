@@ -50,12 +50,13 @@ genrule(
         "@kitty//vim:Plugin",
     ],
     outs = ["install-kitty.sh"],
+    # Using the construct '$$(echo $$)HOME' is a hack to write '$HOME' without interpreting it as a shell variable
     cmd_bash = """
 cat << EOF > $@
-./configure --prefix="~/.local"
+./configure --prefix="$$(echo $$)HOME/.local"
 make install
-mkdir -p "~/.vim/pack/plugins/opt/kitty/plugin"
-cp $(location @kitty//vim:Plugin) "~.vim/pack/plugins/opt/kitty/plugin/$$(basename $(location @kitty//vim:Plugin))"
+mkdir -p "$$(echo $$)HOME/.vim/pack/plugins/opt/kitty/plugin"
+cp $(location @kitty//vim:Plugin) "$$(echo $$)HOME/.vim/pack/plugins/opt/kitty/plugin/$$(basename $(location @kitty//vim:Plugin))"
 EOF
 """,
 )
