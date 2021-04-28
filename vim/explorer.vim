@@ -6,7 +6,7 @@ function! KittyGoToSelectedFile()
 endfunction
 
 function! KittyGoToNextSearchResult()
-  execute '/\.\/.*\:[0-9]\+\:    '
+  call search('./\/.*\:[0-9]\+\:')
   normal 2t:
   call search(g:kittysearchpattern)
 endfunction
