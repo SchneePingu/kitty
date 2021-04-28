@@ -16,4 +16,4 @@ jobs:
       - name: Package test
         run: ./bazelisk build @kitty//:KittyRelease
       - name: Installation test
-        run: cd bazel-bin && tar -xzf kitty-1.3.tar.gz && cd kitty-1.3/ && ./configure --prefix="$HOME/.local" && make install && mkdir -p $HOME/.vim/pack/plugins/opt/kitty/plugin && cp vim/explorer.vim $HOME/.vim/pack/plugins/opt/kitty/plugin/explorer.vim && cd .. && rm -rf kitty-1.3
+        run: cd bazel-bin && tar -xzf kitty-*.tar.gz && cd kitty-*/ && ./install-kitty.sh
