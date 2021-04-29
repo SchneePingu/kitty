@@ -17,12 +17,12 @@ To display the result in VIM, use the option `-v`.
 To install `kitty` to `$HOME/.local`, you may use the installer `install-kitty.sh` contained in the release archive.
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.3/kitty-1.3.tar.gz \
+curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
 | tar -xz \
-&& cd kitty-1.3/ \
+&& cd kitty-1.4/ \
 && ./install-kitty.sh
 && cd .. \
-&& rm -rf kitty-1.3
+&& rm -rf kitty-1.4
 ```
 
 ### VIM(8) plugin
