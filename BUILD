@@ -9,7 +9,7 @@ genrule(
     name = "MakeKitty",
     srcs = [
         "@kitty//sh:Kitty",
-        "@kitty//autotools:AutotoolsResources",
+        "@kitty//package/autotools:AutotoolsResources",
         "@kitty//:Documentation",
         "@kitty//man:Manpage",
         "@kitty//vim:Plugin",
@@ -18,7 +18,7 @@ genrule(
     outs = ["kitty-{}.tar.gz".format(VERSION)],
     cmd_bash = """
 cp $(location @kitty//:Installer) .
-cp $(locations @kitty//autotools:AutotoolsResources) .
+cp $(locations @kitty//package/autotools:AutotoolsResources) .
 aclocal
 autoconf
 automake --add-missing
