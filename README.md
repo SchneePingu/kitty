@@ -20,7 +20,7 @@ To install `kitty` to `$HOME/.local`, you may use the installer `install-kitty.s
 curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
 | tar -xz \
 && cd kitty-1.4/ \
-&& ./install-kitty.sh
+&& ./install-kitty.sh \
 && cd .. \
 && rm -rf kitty-1.4
 ```
