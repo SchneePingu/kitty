@@ -14,22 +14,16 @@ To display the result in VIM, use the option `-v`.
 
 ### Kitty installation
 
-To install `kitty` to `$HOME/.local`, you may use the following command:
+To install `kitty` to `$HOME/.local`, you may use the installer `install-kitty.sh` contained in the release archive.
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.3/kitty-1.3.tar.gz \
+curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
 | tar -xz \
-&& cd kitty-1.3/ \
-&& ./configure --prefix="$HOME/.local" \
-&& make install \
-&& mkdir -p $HOME/.vim/pack/plugins/opt/kitty/plugin \
-&& cp explorer.vim $HOME/.vim/pack/plugins/opt/kitty/plugin/explorer.vim \
+&& cd kitty-1.4/ \
+&& ./install-kitty.sh
 && cd .. \
-&& rm -rf kitty-1.3
+&& rm -rf kitty-1.4
 ```
-
-If you want to install `kitty` to a directory other than `$HOME/.local`, please adapt the path specified by the `--prefix` option.
-Take care for this path to be covered by the `PATH` environment variable!
 
 ### VIM(8) plugin
 
@@ -55,7 +49,7 @@ map <silent> <c-@> :silent! call KittyGoToNextSearchResult()<CR>
 #### Deployment
 
 `Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
-To create a release for `kitty`, just execute the command `./bazelisk build @kitty//:KittyRelease`.
+To create a release for `kitty`, just execute the command `./bazelisk build @kitty//package:KittyRelease`.
 This will create a `tar.gz` archive ready for distribution in `bazel-bin`.
 
 #### System tests
