@@ -14,13 +14,13 @@ To display the result in VIM, use the option `-v`.
 
 ### Kitty installation
 
-To install `kitty` to `$HOME/.local`, you may use the installer `kitty-installer.sh` contained in the release archive.
+To install `kitty` to `$HOME/.local`, you may use the installer `install-kitty.sh` contained in the release archive.
 
 ```bash
 curl -L https://www.github.com/yaubik/kitty/releases/download/v1.3/kitty-1.3.tar.gz \
 | tar -xz \
 && cd kitty-1.3/ \
-&& ./kitty-installer.sh
+&& ./install-kitty.sh
 && cd .. \
 && rm -rf kitty-1.3
 ```
