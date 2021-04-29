@@ -43,7 +43,7 @@ genrule(
         "@kitty//man:Manpage",
         "@kitty//sh:Kitty",
         "@kitty//vim:Plugin",
-        "@kitty//:Installer"
+        "@kitty//package:Installer"
     ],
     outs = ["Makefile.am"],
     cmd_bash = """
@@ -51,7 +51,7 @@ cat << EOF > $@
 bin_SCRIPTS = sh/kitty
 man1_MANS = $(location @kitty//man:Manpage)
 
-EXTRA_DIST = $(locations @kitty//:Documentation) $(location @kitty//man:Manpage) $(location @kitty//vim:Plugin) $(location @kitty//sh:Kitty) $$(basename $(location @kitty//:Installer))
+EXTRA_DIST = $(locations @kitty//:Documentation) $(location @kitty//man:Manpage) $(location @kitty//vim:Plugin) $(location @kitty//sh:Kitty) $$(basename $(location @kitty//package:Installer))
 EOF
     """,
 )
