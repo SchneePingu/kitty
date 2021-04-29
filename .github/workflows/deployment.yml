@@ -16,4 +16,4 @@ jobs:
       - name: Package test
         run: ./bazelisk build @kitty//package:KittyRelease
       - name: Installation test
-        run: cd bazel-bin && tar -xzf kitty-*.tar.gz && cd kitty-*/ && ./install-kitty.sh
+        run: cd bazel-bin/package && tar -xzf kitty-*.tar.gz && cd kitty-*/ && ./install-kitty.sh
