@@ -5,6 +5,14 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### New features
 
+### Notable Changes
+
+### Fixes
+
+## [Kitty 1.4]
+
+### New features
+
 * Use `install-kitty` script in release archive to install `kitty`.
 * Jump to next search result with `:call KittyGoToNextSearchResult()` (`CTRL + SPACE`) in `VIM`.
 * Results for file content search are colored when displayed in the command line.
