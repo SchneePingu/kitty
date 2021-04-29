@@ -14,6 +14,6 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Package test
-        run: ./bazelisk build @kitty//:KittyRelease
+        run: ./bazelisk build @kitty//package:KittyRelease
       - name: Installation test
         run: cd bazel-bin && tar -xzf kitty-*.tar.gz && cd kitty-*/ && ./install-kitty.sh
