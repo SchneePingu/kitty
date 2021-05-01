@@ -1,11 +1,15 @@
-![kitty](https://img.shields.io/badge/kitty-v1.4-purple.svg)
-![license](https://img.shields.io/badge/license-MIT-blue.svg)
-![build](https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg)
-![tests](https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg)
-![bash](https://img.shields.io/badge/bash-v4.4-orange.svg)
-![bazel](https://img.shields.io/badge/bazel-v4.0-orange.svg)
-![python](https://img.shields.io/badge/python-v3.6-orange.svg)
-![vim](https://img.shields.io/badge/vim-v8.0-orange.svg)
+<p align="center"><img src="/imgs/kitty-emblem.svg" alt="kitty" width="150"></p>
+
+<p align="center">
+    <a href="https://img.shields.io/badge/kitty-v1.4-purple.svg"><img src="https://img.shields.io/badge/kitty-v1.4-purple.svg" alt="kitty"></a>
+    <a href="https://img.shields.io/badge/license-MIT-blue.svg"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
+    <a href="https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg"><img src="https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg" alt="build"></a>
+    <a href="https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg"><img src="https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg" alt="test"></a>
+    <a href="https://img.shields.io/badge/bash-v4.4-orange.svg"><img src="https://img.shields.io/badge/bash-v4.4-orange.svg" alt="bash"></a>
+    <a href="https://img.shields.io/badge/bazel-v4.0-orange.svg"><img src="https://img.shields.io/badge/bazel-v4.0-orange.svg" alt="bazel"></a>
+    <a href="https://img.shields.io/badge/python-v3.6-orange.svg"><img src="https://img.shields.io/badge/python-v3.6-orange.svg" alt="python"></a>
+    <a href="https://img.shields.io/badge/vim-v8.0-orange.svg"><img src="https://img.shields.io/badge/vim-v8.0-orange.svg" alt="vim"></a>
+</p>
 
 ### What is Kitty?
 
