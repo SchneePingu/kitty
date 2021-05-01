@@ -2,6 +2,7 @@
 ![license](https://img.shields.io/badge/license-MIT-blue.svg)
 ![build](https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg)
 ![tests](https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg)
+![bash](https://img.shields.io/badge/bash-v4.4-orange.svg)
 ![bazel](https://img.shields.io/badge/bazel-v4.0-orange.svg)
 ![python](https://img.shields.io/badge/python-v3.6-orange.svg)
 ![vim](https://img.shields.io/badge/vim-v8.0-orange.svg)
