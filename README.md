@@ -1,4 +1,4 @@
-<p align="center"><img src="/imgs/kitty-emblem.svg" alt="kitty" width="150"></p>
+<p align="center"><img src="/imgs/kitty-emblem.svg" alt="kitty" width="250"></p>
 
 <p align="center">
     <a href="https://img.shields.io/badge/kitty-v1.4-purple.svg"><img src="https://img.shields.io/badge/kitty-v1.4-purple.svg" alt="kitty"></a>
