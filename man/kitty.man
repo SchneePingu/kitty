@@ -55,13 +55,13 @@ displays the result in VIM.
 In order to browse conveniently through the matching directories and files,
 kitty provides the following key mapping in VIM.
 
-.B CTRL + x:
+.B CTRL + l:
 open directory in explorer / open file in VIM
 .br
-.B CTRL + y:
+.B CTRL + h:
 close explorer / close VIM
 .br
-.B CTRL + SPACE:
+.B CTRL + j:
 jump to next search result
 
 .SH COPYRIGHT
