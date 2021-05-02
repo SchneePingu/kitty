@@ -150,9 +150,6 @@ hasError()
 searchFileSystemForPattern()
 {
     local searchPattern="$1"
-    local startAtCurrentDirectory='.'
-    local excludeHiddenDirectoriesFromSearch='-not -path "*/\.*"'
-    local specifyFileTypes='-type '$(getListOfFileTypes)
 
     # This construct is not looking clean,
     # but refactoring the '-exec' and '-name' options causes issues,
@@ -160,14 +157,14 @@ searchFileSystemForPattern()
     if ${searchFileContent}
     then
         local colorOption=$(getColorOptionForGrep)
-        find    ${startAtCurrentDirectory} \
-                ${excludeHiddenDirectoriesFromSearch} \
-                ${specifyFileTypes} \
+        find    . \
+                -not -path "*/\.*" \
+                -type $(getListOfFileTypes) \
                 -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" {} +
     else
-        find    ${startAtCurrentDirectory} \
-                ${excludeHiddenDirectoriesFromSearch} \
-                ${specifyFileTypes} \
+        find    . \
+                -not -path "*/\.*" \
+                -type $(getListOfFileTypes) \
                 -name "*${searchPattern}*"
     fi | displaySearchResult ${searchPattern}
 }
