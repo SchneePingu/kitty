@@ -216,7 +216,7 @@ displaySearchResult()
         local closeVimIfEmptySearchResult='exe !search(".")?"quit!":""'
         local loadKittyVimPlugin=':packadd kitty'
         local searchPattern="$1"
-        local defineSearchPattern=":let kittysearchpattern = \"${searchPattern}\""
+        local defineSearchPattern=":let kittySearchPattern = \"${searchPattern}\""
         local moveCursorToFirstSearchResult=':call KittyGoToNextSearchResult()'
         local suppressReadingFromStdinMessage='--not-a-term'
 
