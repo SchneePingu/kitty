@@ -7,6 +7,8 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Notable Changes
 
+* Key mappings of VIM plugin have changed.
+
 ### Fixes
 
 * The file for a search result containing a backticks command substitution can be opened with the VIM plugin.
