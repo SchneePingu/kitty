@@ -46,15 +46,15 @@ defined in the line where the cursor is located,
 can be opened by `:call KittyGoToSelectedFile()`.
 To jump to the next search result, use `:call KittyGoToNextSearchResult()`.
 For convenience, the plugin also provides a key mapping for this,
-such that files or directories may be opened with `CTRL + x` and closed with `CTRL + y`.
-When pressing `CTRL + SPACE`, the cursor jumps to the next search result.
+such that files or directories may be opened with `CTRL + l` and closed with `CTRL + h`.
+When pressing `CTRL + j`, the cursor jumps to the next search result.
 However, this mapping is only applied if not in use already, in order not mess with your setup.
-To setup a custom mapping, add the following to `$HOME/.vimrc` and adapt the keys `<c-x>`, `<c-y>` and `<c-@>`:
+To setup a custom mapping, add the following to `$HOME/.vimrc` and adapt the keys `<c-h>`, `<c-j>` and `<c-l>`:
 
 ```bash
-map <c-x> :call KittyGoToSelectedFile()<CR>
-map <c-y> :q!<CR>
-map <silent> <c-@> :silent! call KittyGoToNextSearchResult()<CR>
+map <c-l> :call KittyGoToSelectedFile()<CR>
+map <c-h> :q!<CR>
+map <silent> <c-j> :silent! call KittyGoToNextSearchResult()<CR>
 ```
 
 ### Kitty developer
