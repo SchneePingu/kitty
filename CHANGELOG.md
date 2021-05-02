@@ -11,6 +11,7 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Fixes
 
+* Hidden directories and files are excluded from the search.
 * The file for a search result containing a backticks command substitution can be opened with the VIM plugin.
 
 ## [Kitty 1.4]
