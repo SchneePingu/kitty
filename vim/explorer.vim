@@ -6,11 +6,13 @@ function! KittyGoToSelectedFile()
 endfunction
 
 function! KittyGoToNextSearchResult()
-  call search('./\/.*\:[0-9]\+\:')
-  normal 2t:
-  call search(g:kittysearchpattern)
+  if search(g:kittySearchPattern, '', line("."))
+  else
+    call search('^\./.*\:[0-9]\+\:', 'e')
+    call search(g:kittySearchPattern, '')
+  endif
 endfunction
 
-nnoremap <c-y> :q!<CR>
-nnoremap <c-x> :call KittyGoToSelectedFile()<CR>
-nnoremap <silent> <c-@> :silent! call KittyGoToNextSearchResult()<CR>
+nnoremap <c-h> :q!<CR>
+nnoremap <c-l> :call KittyGoToSelectedFile()<CR>
+nnoremap <silent> <c-j> :silent! call KittyGoToNextSearchResult()<CR>
