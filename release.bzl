@@ -20,7 +20,8 @@ aclocal
 autoconf
 automake --add-missing
 ./configure
-make distcheck
+make distcheck --dry-run
+make dist
 mv kitty-*.tar.gz $@
 """,
 )
