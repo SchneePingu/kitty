@@ -1,3 +1,5 @@
+load('@kitty//:release.bzl', 'Release')
+
 filegroup(
     name = "Documentation",
     srcs = [
@@ -7,3 +9,14 @@ filegroup(
     ],
     visibility = ["//visibility:public"]
 )
+
+filegroup(
+    name = "Autotools",
+    srcs = [
+        "configure.ac",
+        "Makefile.am",
+    ],
+    visibility = ["//visibility:public"]
+)
+
+Release()
