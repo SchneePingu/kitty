@@ -3,4 +3,4 @@
 tar -xvf kitty.tar.gz
 cd kitty-*
 ./configure --prefix="$HOME/.local"
-make --dry-run
+make install --dry-run
