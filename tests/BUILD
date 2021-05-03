@@ -9,3 +9,10 @@ py_library(
     srcs = ["py/TestHelper.py"],
     data = ["data", "@kitty//sh:Kitty"],
 )
+
+sh_test(
+    name = "InstallationTest",
+    size = "small",
+    srcs = ["sh/InstallationTest.sh"],
+    data = ["@kitty//:Release"],
+)

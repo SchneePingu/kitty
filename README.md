@@ -27,13 +27,14 @@ To display the result in VIM, use the option `-v`.
 
 ### Kitty installation
 
-To install `kitty` to `$HOME/.local`, you may use the installer `install-kitty.sh` contained in the release archive.
+To install `kitty` to `$HOME/.local`, you may download the release archive and run `./configure --prefix=$HOME/.local && make install`:
 
 ```bash
 curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
 | tar -xz \
 && cd kitty-1.4/ \
-&& ./install-kitty.sh \
+&& ./configure --prefix="$HOME/.local" \
+&& make install \
 && cd .. \
 && rm -rf kitty-1.4
 ```
@@ -62,10 +63,10 @@ map <silent> <c-j> :silent! call KittyGoToNextSearchResult()<CR>
 #### Deployment
 
 `Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
-To create a release for `kitty`, just execute the command `./bazelisk build @kitty//package:KittyRelease`.
+To create a release for `kitty`, just execute the command `./bazelisk build Release`.
 This will create a `tar.gz` archive ready for distribution in `bazel-bin`.
 
 #### System tests
 
 `Kitty` is tested with Python 3 by means of the `unittest` module.
-The tests are located in the `tests` directory and are executed by the bazel command `./bazelisk test @kitty//tests:SystemTests`
+The tests are located in the `tests` directory and are executed by the bazel commands `./bazelisk test @kitty//tests:SystemTests` and `./bazelisk test @kitty//tests:InstallationTest`
