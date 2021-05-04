@@ -81,3 +81,12 @@ This test is located in the `tests/sh` directory and is executed by means of `ba
 ```bash
 ./bazelisk test @kitty//tests:InstallationTest
 ```
+
+#### Linting
+
+To minimize introducing bugs in the code of `kitty`, it is analyzed with the [ShellCheck](https://www.shellcheck.net/) linter.
+The corresponding test is located in the `tests/sh` directory and is executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:LinterTest
+```
