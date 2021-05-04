@@ -13,60 +13,71 @@
 
 ### What is Kitty?
 
-Kitty is a command line tool (bash script) to search the current directory - including all non-hidden subdirectories - for directories, files and file contents matching a name.
+Kitty is a Linux command line tool to search the current directory - including all non-hidden subdirectories - for files, file contents and directories matching a specific pattern. The result is either displayed on command line or can even be browsed in [Vim8](https://vim8.org/).
 
-### Kitty usage
-
-Kitty is executed the following way
 ```bash
-kitty [-v] [-c -d -f] NAME
+kitty OPTIONS PATTERN
 ```
-where `NAME` specifies the pattern to search for.
-To search for directories use the option `-d`, to search for files use the option `-f`, and to search for file contents use the option `-c`. Notice that the options `-d` and `-f` can be used simultaneously, while the option `-c` has a higher precedence.
-To display the result in VIM, use the option `-v`.
+
+The exact usage of `kitty` is described in detail in its manpage.
+
+```bash
+man kitty
+```
 
 ### Kitty installation
 
-To install `kitty` to `$HOME/.local`, you may download the release archive and run `./configure --prefix=$HOME/.local && make install`:
+To install `kitty` to the directory `$HOME/.local`,
+first download the latest [release](https://github.com/SchneePingu/kitty/releases/latest) tarball and
+extract the files.
+Then configure the installation and
+finally install the files:
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
-| tar -xz \
-&& cd kitty-1.4/ \
-&& ./configure --prefix="$HOME/.local" \
-&& make install \
-&& cd .. \
-&& rm -rf kitty-1.4
+./configure --prefix="$HOME/.local"
+make install
 ```
 
-### VIM(8) plugin
+### Vim plugin
 
-Kitty provides a plugin for VIM 8 to navigate through its output.
-This way - when the output of kitty is displayed in VIM - the file or directory,
-defined in the line where the cursor is located,
-can be opened by `:call KittyGoToSelectedFile()`.
-To jump to the next search result, use `:call KittyGoToNextSearchResult()`.
-For convenience, the plugin also provides a key mapping for this,
-such that files or directories may be opened with `CTRL + l` and closed with `CTRL + h`.
-When pressing `CTRL + j`, the cursor jumps to the next search result.
-However, this mapping is only applied if not in use already, in order not mess with your setup.
-To setup a custom mapping, add the following to `$HOME/.vimrc` and adapt the keys `<c-h>`, `<c-j>` and `<c-l>`:
+`Kitty` provides a plugin for [Vim8](https://vim8.org/) to easily browse the search result,
+that is jump to the next match and open the corresponding files and directories.
+
+The exact usage of the plugin is described in detail in the `kitty` manpage.
 
 ```bash
-map <c-l> :call KittyGoToSelectedFile()<CR>
-map <c-h> :q!<CR>
-map <silent> <c-j> :silent! call KittyGoToNextSearchResult()<CR>
+man kitty
 ```
 
 ### Kitty developer
 
+This section is for developers, who want to build a non-released version of `kitty` or even contribute to the project.
+
 #### Deployment
 
-`Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
-To create a release for `kitty`, just execute the command `./bazelisk build Release`.
-This will create a `tar.gz` archive ready for distribution in `bazel-bin`.
+`Kitty` is configured with [bazel](https://bazel.build/) and `autotools`, that is [autoconf](https://www.gnu.org/software/autoconf/autoconf.html) and [automake](https://www.gnu.org/software/automake/automake.html).
+A tarball - ready for distribution - is created from the top level directory of this project by means of `bazelisk`.
+
+```bash
+./bazelisk build Release
+```
+
+This creates the tarball `kitty.tar.gz` in the directory `bazel-bin`.
 
 #### System tests
 
-`Kitty` is tested with Python 3 by means of the `unittest` module.
-The tests are located in the `tests` directory and are executed by the bazel commands `./bazelisk test @kitty//tests:SystemTests` and `./bazelisk test @kitty//tests:InstallationTest`
+To ensure `kitty` behaves as expected, it is tested with the `unittest` module of Python 3.
+These tests are located in the `tests/py` directory and are executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:SystemTests
+```
+
+#### Installation test
+
+To ensure `kitty` can be installed properly, the installation process is tested with a shell script.
+This test is located in the `tests/sh` directory and is executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:InstallationTest
+```
