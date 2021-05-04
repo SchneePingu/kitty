@@ -51,13 +51,33 @@ man kitty
 
 ### Kitty developer
 
+This section is for developers, who want to build a non-released version of `kitty` or even contribute to the project.
+
 #### Deployment
 
-`Kitty` is configured with `bazel` and `autotools`, that is `autoconf` and `automake`.
-To create a release for `kitty`, just execute the command `./bazelisk build Release`.
-This will create a `tar.gz` archive ready for distribution in `bazel-bin`.
+`Kitty` is configured with [bazel](https://bazel.build/) and `autotools`, that is [autoconf](https://www.gnu.org/software/autoconf/autoconf.html) and [automake](https://www.gnu.org/software/automake/automake.html).
+A tarball - ready for distribution - is created from the top level directory of this project by means of `bazelisk`.
+
+```bash
+./bazelisk build Release
+```
+
+This creates the tarball `kitty.tar.gz` in the directory `bazel-bin`.
 
 #### System tests
 
-`Kitty` is tested with Python 3 by means of the `unittest` module.
-The tests are located in the `tests` directory and are executed by the bazel commands `./bazelisk test @kitty//tests:SystemTests` and `./bazelisk test @kitty//tests:InstallationTest`
+To ensure `kitty` behaves as expected, it is tested with the `unittest` module of Python 3.
+These tests are located in the `tests/py` directory and are executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:SystemTests
+```
+
+#### Installation test
+
+To ensure `kitty` can be installed properly, the installation process is tested with a shell script.
+This test is located in the `tests/sh` directory and is executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:InstallationTest
+```
