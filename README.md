@@ -13,7 +13,7 @@
 
 ### What is Kitty?
 
-Kitty is a Linux command line tool to search the current directory - including all non-hidden subdirectories - for files, file contents and directories matching a specific pattern. The result is either displayed on command line or can even be browsed in [Vim](https://www.vim.org/).
+Kitty is a Linux command line tool to search the current directory - including all non-hidden subdirectories - for files, file contents and directories matching a specific pattern. The result is either displayed on command line or can even be browsed in [Vim8](https://vim8.org/).
 
 ```bash
 kitty OPTIONS PATTERN
@@ -38,23 +38,15 @@ finally install the files:
 make install
 ```
 
-### VIM(8) plugin
+### Vim plugin
 
-Kitty provides a plugin for VIM 8 to navigate through its output.
-This way - when the output of kitty is displayed in VIM - the file or directory,
-defined in the line where the cursor is located,
-can be opened by `:call KittyGoToSelectedFile()`.
-To jump to the next search result, use `:call KittyGoToNextSearchResult()`.
-For convenience, the plugin also provides a key mapping for this,
-such that files or directories may be opened with `CTRL + l` and closed with `CTRL + h`.
-When pressing `CTRL + j`, the cursor jumps to the next search result.
-However, this mapping is only applied if not in use already, in order not mess with your setup.
-To setup a custom mapping, add the following to `$HOME/.vimrc` and adapt the keys `<c-h>`, `<c-j>` and `<c-l>`:
+`Kitty` provides a plugin for [Vim8](https://vim8.org/) to easily browse the search result,
+that is jump to the next match and open the corresponding files and directories.
+
+The exact usage of the plugin is described in detail in the `kitty` manpage.
 
 ```bash
-map <c-l> :call KittyGoToSelectedFile()<CR>
-map <c-h> :q!<CR>
-map <silent> <c-j> :silent! call KittyGoToNextSearchResult()<CR>
+man kitty
 ```
 
 ### Kitty developer
