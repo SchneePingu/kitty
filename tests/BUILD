@@ -16,3 +16,10 @@ sh_test(
     srcs = ["sh/InstallationTest.sh"],
     data = ["@kitty//:Release"],
 )
+
+sh_test(
+    name = "LinterTest",
+    size = "small",
+    srcs = ["sh/LinterTest.sh"],
+    data = ["@kitty//sh:Kitty"],
+)
