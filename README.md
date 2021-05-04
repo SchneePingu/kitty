@@ -25,16 +25,6 @@ The exact usage of `kitty` is described in detail in its manpage.
 man kitty
 ```
 
-### Kitty usage
-
-Kitty is executed the following way
-```bash
-kitty [-v] [-c -d -f] NAME
-```
-where `NAME` specifies the pattern to search for.
-To search for directories use the option `-d`, to search for files use the option `-f`, and to search for file contents use the option `-c`. Notice that the options `-d` and `-f` can be used simultaneously, while the option `-c` has a higher precedence.
-To display the result in VIM, use the option `-v`.
-
 ### Kitty installation
 
 To install `kitty` to the directory `$HOME/.local`,
