@@ -27,16 +27,15 @@ To display the result in VIM, use the option `-v`.
 
 ### Kitty installation
 
-To install `kitty` to `$HOME/.local`, you may download the release archive and run `./configure --prefix=$HOME/.local && make install`:
+To install `kitty` to the directory `$HOME/.local`,
+first download the latest [release](https://github.com/SchneePingu/kitty/releases/latest) tarball and
+extract the files.
+Then configure the installation and
+finally install the files:
 
 ```bash
-curl -L https://www.github.com/yaubik/kitty/releases/download/v1.4/kitty-1.4.tar.gz \
-| tar -xz \
-&& cd kitty-1.4/ \
-&& ./configure --prefix="$HOME/.local" \
-&& make install \
-&& cd .. \
-&& rm -rf kitty-1.4
+./configure --prefix="$HOME/.local"
+make install
 ```
 
 ### VIM(8) plugin
