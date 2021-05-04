@@ -1,4 +1,4 @@
-name: System tests
+name: Code tests
 
 on:
   push:
@@ -16,3 +16,5 @@ jobs:
 
       - name: System tests
         run: ./bazelisk run @kitty//tests:SystemTests
+      - name: Linting (ShellCheck)
+        run: ./bazelisk run @kitty//tests:LinterTest
