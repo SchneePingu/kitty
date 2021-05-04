@@ -13,7 +13,17 @@
 
 ### What is Kitty?
 
-Kitty is a command line tool (bash script) to search the current directory - including all non-hidden subdirectories - for directories, files and file contents matching a name.
+Kitty is a Linux command line tool to search the current directory - including all non-hidden subdirectories - for files, file contents and directories matching a specific pattern. The result is either displayed on command line or can even be browsed in [Vim](https://www.vim.org/).
+
+```bash
+kitty OPTIONS PATTERN
+```
+
+The exact usage of `kitty` is described in detail in its manpage.
+
+```bash
+man kitty
+```
 
 ### Kitty usage
 
