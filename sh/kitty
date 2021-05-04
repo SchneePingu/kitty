@@ -3,17 +3,17 @@
 #TODO: Split into multiple files
 main()
 {
-    scriptName=$(basename $0)
+    scriptName=$(basename "$0")
 
-    arguments=$@
-    parseCommandLineArguments ${arguments}
+    arguments=($@)
+    parseCommandLineArguments "${arguments[@]}"
     if hasError $?
     then
         exit 1
     fi
 
     searchPattern="${argumentsWithoutOptions[0]}"
-    searchFileSystemForPattern ${searchPattern}
+    searchFileSystemForPattern "${searchPattern}"
 }
 
 parseCommandLineArguments()
@@ -22,13 +22,13 @@ parseCommandLineArguments()
 
     initalizeCommandLineArguments
 
-    local arguments=$@
-    while hasArguments ${arguments}
+    local arguments=($@)
+    while hasArguments "${arguments[@]}"
     do
-        parseCommandLineOptions ${arguments}
+        parseCommandLineOptions "${arguments[@]}"
         exitCode=$?
 
-        local numberOfParsedOptions=$(($OPTIND - 1))
+        local numberOfParsedOptions=$((OPTIND - 1))
         # remove parsed options from arguments
         shift ${numberOfParsedOptions}
         unset OPTIND
@@ -38,10 +38,10 @@ parseCommandLineArguments()
         # remove next argument from arguments
         shift
 
-        arguments=$@
+        arguments=($@)
     done
 
-    if ! hasSearchPattern ${argumentsWithoutOptions}
+    if ! hasSearchPattern "${argumentsWithoutOptions[@]}"
     then
         echo "${scriptName}: missing search pattern" 1>&2
     fi
@@ -71,12 +71,13 @@ parseCommandLineOptions()
 {
     local exitCode=0
 
-    local optstring=$(getOptstringForGetopts)
-    local arguments=$@
+    local optstring
+    optstring=$(getOptstringForGetopts)
+    local arguments=($@)
 
-    while getopts ${optstring} option ${arguments}
+    while getopts "${optstring}" option "${arguments[@]}"
     do
-        setOption ${option}
+        setOption "${option}"
         exitCode=$?
     done
 
@@ -127,8 +128,8 @@ isValidOption()
 
 hasSearchPattern()
 {
-    arguments=$@
-    if hasArguments ${arguments}
+    arguments=($@)
+    if hasArguments "${arguments[@]}"
     then
         true
     else
@@ -156,26 +157,27 @@ searchFileSystemForPattern()
     # due to the wildcards being extended by bash.
     if ${searchFileContent}
     then
-        local colorOption=$(getColorOptionForGrep)
+        local colorOption
+        colorOption=$(getColorOptionForGrep)
         find    . \
                 -not -path "*/\.*" \
-                -type $(getListOfFileTypes) \
-                -exec grep ${colorOption} -nHEs -C 1 ".*${searchPattern}.*" {} +
+                -type "$(getListOfFileTypes)" \
+                -exec grep "${colorOption}" -nHEs -C 1 ".*${searchPattern}.*" {} +
     else
         find    . \
                 -not -path "*/\.*" \
-                -type $(getListOfFileTypes) \
+                -type "$(getListOfFileTypes)" \
                 -name "*${searchPattern}*"
-    fi | displaySearchResult ${searchPattern}
+    fi | displaySearchResult "${searchPattern}"
 }
 
 getListOfFileTypes()
 {
-    if ${searchFileContent}
+    if "${searchFileContent}"
     then
         echo 'f'
     else
-        echo $(echo ${fileTypeOptions[@]} | replaceWhitespaceByComma)
+        echo "${fileTypeOptions[@]}" | replaceWhitespaceByComma
     fi
 }
 
@@ -229,4 +231,4 @@ displaySearchResult()
 }
 
 
-main $@
+main "$@"
