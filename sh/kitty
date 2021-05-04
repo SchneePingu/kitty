@@ -5,7 +5,7 @@ main()
 {
     scriptName=$(basename "$0")
 
-    arguments=($@)
+    arguments=("$@")
     parseCommandLineArguments "${arguments[@]}"
     if hasError $?
     then
@@ -22,7 +22,7 @@ parseCommandLineArguments()
 
     initalizeCommandLineArguments
 
-    local arguments=($@)
+    local arguments=("$@")
     while hasArguments "${arguments[@]}"
     do
         parseCommandLineOptions "${arguments[@]}"
@@ -34,11 +34,11 @@ parseCommandLineArguments()
         unset OPTIND
 
         nextArgument="$1"
-        argumentsWithoutOptions+=(${nextArgument})
+        argumentsWithoutOptions+=("${nextArgument}")
         # remove next argument from arguments
         shift
 
-        arguments=($@)
+        arguments=("$@")
     done
 
     if ! hasSearchPattern "${argumentsWithoutOptions[@]}"
@@ -73,7 +73,7 @@ parseCommandLineOptions()
 
     local optstring
     optstring=$(getOptstringForGetopts)
-    local arguments=($@)
+    local arguments=("$@")
 
     while getopts "${optstring}" option "${arguments[@]}"
     do
@@ -128,7 +128,7 @@ isValidOption()
 
 hasSearchPattern()
 {
-    arguments=($@)
+    arguments=("$@")
     if hasArguments "${arguments[@]}"
     then
         true
@@ -200,7 +200,7 @@ getColorOptionForGrep()
 
 hasVimInstallation()
 {
-    if [[ -z "$(which vim)" ]]
+    if [[ -z "$(command -v vim)" ]]
     then
         false
     else
