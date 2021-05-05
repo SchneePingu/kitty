@@ -20,8 +20,19 @@ sh_test(
 sh_test(
     name = "LintBashCode",
     size = "small",
-    srcs = ["sh/LintBashCode.sh"],
+    srcs = ["LintBashCode.sh"],
     data = ["@kitty//sh:Kitty"],
+)
+
+genrule(
+    name = "GenerateBashCodeLinter",
+    srcs = ["@kitty//sh:Kitty"],
+    outs = ["LintBashCode.sh"],
+    cmd = """
+cat << EOF > $@
+shellcheck $(SRCS)
+EOF
+""",
 )
 
 sh_test(
