@@ -53,6 +53,14 @@ man kitty
 
 This section is for developers, who want to build a non-released version of `kitty` or even contribute to the project.
 
+The `kitty` development environment relies on a couple of tools to be installed on your system.
+* [autoconf](https://www.gnu.org/software/autoconf/autoconf.html)
+* [automake](https://www.gnu.org/software/automake/automake.html)
+* [make](https://www.gnu.org/software/make/make.html)
+* [python3](https://www.python.org/)
+* [shellcheck](https://www.shellcheck.net/)
+* [pylint](https://pylint.org/)
+
 #### Deployment
 
 `Kitty` is configured with [bazel](https://bazel.build/) and `autotools`, that is [autoconf](https://www.gnu.org/software/autoconf/autoconf.html) and [automake](https://www.gnu.org/software/automake/automake.html).
