@@ -1,12 +1,12 @@
 py_test(
     name = "SystemTests",
-    srcs = ["py/SystemTests.py"],
+    srcs = ["py/system_tests.py"],
     deps = [":TestHelper"],
 )
 
 py_library(
     name = "TestHelper",
-    srcs = ["py/TestHelper.py"],
+    srcs = ["py/test_helper.py"],
     data = ["data", "@kitty//sh:Kitty"],
 )
 
