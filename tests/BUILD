@@ -49,9 +49,7 @@ genrule(
     outs = ["LintPythonTestCode.sh"],
     cmd = """
 cat << EOF > $@
-# The 'subprocess' module is ignored,
-# because its method 'run' is falsely not recognized as member.
-python -m pylint --ignored-modules=subprocess $(SRCS)
+python3 -m pylint $(SRCS)
 EOF
 """,
 )
