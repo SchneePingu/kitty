@@ -23,3 +23,28 @@ sh_test(
     srcs = ["sh/LinterTest.sh"],
     data = ["@kitty//sh:Kitty"],
 )
+
+sh_test(
+    name = "PythonLinterTest",
+    size = "small",
+    srcs = ["PyLinterTest.sh"],
+    data = [":PythonTestCode"],
+)
+
+genrule(
+    name = "GeneratePythonLinterTest",
+    srcs = [":PythonTestCode"],
+    outs = ["PyLinterTest.sh"],
+    cmd = """
+cat << EOF > $@
+# The 'subprocess' module is ignored,
+# because its method 'run' is falsely not recognized as member.
+pylint --ignored-modules=subprocess $(SRCS)
+EOF
+""",
+)
+
+filegroup(
+    name = "PythonTestCode",
+    srcs = glob(["py/*.py"]),
+)
