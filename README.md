@@ -92,9 +92,16 @@ This test is located in the `tests/sh` directory and is executed by means of `ba
 
 #### Linting
 
-To minimize introducing bugs in the code of `kitty`, it is analyzed with the [ShellCheck](https://www.shellcheck.net/) linter.
-The corresponding test is located in the `tests/sh` directory and is executed by means of `bazelisk`.
+To minimize introducing bugs in the code of `kitty`, the bash code is analyzed with the [ShellCheck](https://www.shellcheck.net/) linter.
+The linter is executed by means of `bazelisk`.
 
 ```bash
-./bazelisk test @kitty//tests:LinterTest
+./bazelisk test @kitty//tests:LintBashCode
+```
+
+Furthermore, to minimize introducing bugs in the Python test code, it is analyzed with the [Pylint](https://pylint.org/) linter.
+The linter is executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:LintPythonTestCode
 ```
