@@ -7,7 +7,7 @@ import os
 import re
 
 
-class TestHelper(object):
+class TestHelper:
     """Class to run the 'kitty' command in test code."""
 
     def __init__(self):
@@ -20,7 +20,8 @@ class TestHelper(object):
 
         search_result = subprocess.run([self._path_to_kitty] + kitty_arguments, \
             stdout=subprocess.PIPE, \
-            cwd=self._path_to_data) \
+            cwd=self._path_to_data, \
+            check=True) \
             .stdout.decode('utf-8').strip()
 
         return self.remove_ansi_color_escape_codes(search_result).split(os.linesep)
