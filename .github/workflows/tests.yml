@@ -19,4 +19,6 @@ jobs:
       - name: Lint bash code (ShellCheck)
         run: ./bazelisk run @kitty//tests:LintBashCode
       - name: Lint python test code (Pylint)
-        run: ./bazelisk run @kitty//tests:LintPythonTestCode
+        run: |
+          pip install pylint
+          ./bazelisk run @kitty//tests:LintPythonTestCode
