@@ -2,6 +2,7 @@ py_test(
     name = "SystemTests",
     srcs = ["py/system_tests.py"],
     deps = [":TestHelper"],
+    main = "py/system_tests.py",
 )
 
 py_library(
