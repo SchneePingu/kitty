@@ -51,7 +51,7 @@ genrule(
 cat << EOF > $@
 # The 'subprocess' module is ignored,
 # because its method 'run' is falsely not recognized as member.
-pylint --ignored-modules=subprocess $(SRCS)
+python -m pylint --ignored-modules=subprocess $(SRCS)
 EOF
 """,
 )
