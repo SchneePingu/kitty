@@ -18,23 +18,23 @@ sh_test(
 )
 
 sh_test(
-    name = "LinterTest",
+    name = "LintBashCode",
     size = "small",
-    srcs = ["sh/LinterTest.sh"],
+    srcs = ["sh/LintBashCode.sh"],
     data = ["@kitty//sh:Kitty"],
 )
 
 sh_test(
-    name = "PythonLinterTest",
+    name = "LintPythonTestCode",
     size = "small",
-    srcs = ["PyLinterTest.sh"],
+    srcs = ["LintPythonTestCode.sh"],
     data = [":PythonTestCode"],
 )
 
 genrule(
-    name = "GeneratePythonLinterTest",
+    name = "GeneratePythonTestCodeLinter",
     srcs = [":PythonTestCode"],
-    outs = ["PyLinterTest.sh"],
+    outs = ["LintPythonTestCode.sh"],
     cmd = """
 cat << EOF > $@
 # The 'subprocess' module is ignored,
