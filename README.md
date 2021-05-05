@@ -53,6 +53,14 @@ man kitty
 
 This section is for developers, who want to build a non-released version of `kitty` or even contribute to the project.
 
+The `kitty` development environment relies on a couple of tools to be installed on your system.
+* [autoconf](https://www.gnu.org/software/autoconf/autoconf.html)
+* [automake](https://www.gnu.org/software/automake/automake.html)
+* [make](https://www.gnu.org/software/make/make.html)
+* [python3](https://www.python.org/)
+* [shellcheck](https://www.shellcheck.net/)
+* [pylint](https://pylint.org/)
+
 #### Deployment
 
 `Kitty` is configured with [bazel](https://bazel.build/) and `autotools`, that is [autoconf](https://www.gnu.org/software/autoconf/autoconf.html) and [automake](https://www.gnu.org/software/automake/automake.html).
@@ -84,9 +92,16 @@ This test is located in the `tests/sh` directory and is executed by means of `ba
 
 #### Linting
 
-To minimize introducing bugs in the code of `kitty`, it is analyzed with the [ShellCheck](https://www.shellcheck.net/) linter.
-The corresponding test is located in the `tests/sh` directory and is executed by means of `bazelisk`.
+To minimize introducing bugs in the code of `kitty`, the bash code is analyzed with the [ShellCheck](https://www.shellcheck.net/) linter.
+The linter is executed by means of `bazelisk`.
 
 ```bash
-./bazelisk test @kitty//tests:LinterTest
+./bazelisk test @kitty//tests:LintBashCode
+```
+
+Furthermore, to minimize introducing bugs in the Python test code, it is analyzed with the [Pylint](https://pylint.org/) linter.
+The linter is executed by means of `bazelisk`.
+
+```bash
+./bazelisk test @kitty//tests:LintPythonTestCode
 ```
