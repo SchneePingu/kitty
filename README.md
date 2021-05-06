@@ -1,7 +1,7 @@
 <p align="center"><img src="/imgs/kitty-emblem.svg" alt="kitty" width="250"></p>
 
 <p align="center">
-    <a href="https://img.shields.io/badge/kitty-v1.4-purple.svg"><img src="https://img.shields.io/badge/kitty-v1.4-purple.svg" alt="kitty"></a>
+    <a href="https://img.shields.io/badge/kitty-v1.5-purple.svg"><img src="https://img.shields.io/badge/kitty-v1.5-purple.svg" alt="kitty"></a>
     <a href="https://img.shields.io/badge/license-MIT-blue.svg"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="license"></a>
     <a href="https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg"><img src="https://github.com/SchneePingu/kitty/actions/workflows/deployment.yml/badge.svg" alt="build"></a>
     <a href="https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg"><img src="https://github.com/SchneePingu/kitty/actions/workflows/tests.yml/badge.svg" alt="test"></a>
