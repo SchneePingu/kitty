@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-#TODO: Split into multiple files
 main()
 {
     scriptName=$(basename "$0")
