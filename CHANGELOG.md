@@ -7,6 +7,14 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Notable Changes
 
+### Fixes
+
+## [Kitty 1.5]
+
+### New features
+
+### Notable Changes
+
 * Test Code is analysed with Pylint linter.
 * Kitty is analysed with ShellCheck linter.
 * Vim plugin is installed with `make`.
