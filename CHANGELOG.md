@@ -7,6 +7,14 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Notable Changes
 
+### Fixes
+
+## [Kitty 1.5.1]
+
+### New features
+
+### Notable Changes
+
 * Search result is no longer colored.
 
 ### Fixes
