@@ -24,10 +24,4 @@ class TestHelper:
             check=True) \
             .stdout.decode('utf-8').strip()
 
-        return self.remove_ansi_color_escape_codes(search_result).split(os.linesep)
-
-    @staticmethod
-    def remove_ansi_color_escape_codes(search_result):
-        """Remove ANSI color escape codes from 'kitty' search result."""
-        ansi_color_escape_codes = re.compile(r'\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])')
-        return ansi_color_escape_codes.sub('', search_result)
+        return search_result.split(os.linesep)
