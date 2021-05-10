@@ -156,7 +156,6 @@ searchFileSystemForPattern()
     # due to the wildcards being extended by bash.
     if ${searchFileContent}
     then
-        local colorOption
         find    . \
                 -not -path "*/\.*" \
                 -type "$(getListOfFileTypes)" \
