@@ -9,6 +9,8 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Fixes
 
+* Search result shows only matching lines instead of whole file
+
 ## [Kitty 1.5]
 
 ### New features
