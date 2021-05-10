@@ -159,7 +159,7 @@ searchFileSystemForPattern()
         find    . \
                 -not -path "*/\.*" \
                 -type "$(getListOfFileTypes)" \
-                -exec grep -nHEs -C 1 ".*${searchPattern}.*" {} +
+                -exec grep -nHEIs -C 1 ".*${searchPattern}.*" {} +
     else
         find    . \
                 -not -path "*/\.*" \
