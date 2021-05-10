@@ -157,11 +157,10 @@ searchFileSystemForPattern()
     if ${searchFileContent}
     then
         local colorOption
-        colorOption=$(getColorOptionForGrep)
         find    . \
                 -not -path "*/\.*" \
                 -type "$(getListOfFileTypes)" \
-                -exec grep "${colorOption}" -nHEs -C 1 ".*${searchPattern}.*" {} +
+                -exec grep -nHEs -C 1 ".*${searchPattern}.*" {} +
     else
         find    . \
                 -not -path "*/\.*" \
@@ -183,18 +182,6 @@ getListOfFileTypes()
 replaceWhitespaceByComma()
 {
     tr ' ' ','
-}
-
-getColorOptionForGrep()
-{
-    local colorOption='--color=always'
-
-    if ${displaySearchResultInVim} && hasVimInstallation
-    then
-        colorOption=''
-    fi
-
-    echo ${colorOption}
 }
 
 hasVimInstallation()
