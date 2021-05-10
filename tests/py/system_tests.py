@@ -13,7 +13,8 @@ class TestSearchResult(unittest.TestCase):
     def test_file_search(self):
         """Test searching a file matching a pattern."""
         actual_search_result = test_helper.run_kitty('-f', 'Mouse')
-        expected_search_result = ['./firstMouse.txt', './mousehole/secondMouse.txt']
+        expected_search_result = ['./firstMouse.txt', './mousehole/secondMouse.txt', \
+                                  './binaryMouse']
 
         self.assertCountEqual(actual_search_result, expected_search_result) # pylint: disable=no-member
 

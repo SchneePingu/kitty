@@ -7,9 +7,12 @@ All new features, notable changes and fixes of this project are going to be docu
 
 ### Notable Changes
 
+* Search result is no longer colored.
+
 ### Fixes
 
-* Search result shows only matching lines instead of whole file
+* Binary files are exluded when searching file content.
+* Search result shows only matching lines instead of whole file.
 
 ## [Kitty 1.5]
 
