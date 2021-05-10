@@ -12,21 +12,21 @@ class TestSearchResult(unittest.TestCase):
 
     def test_file_search(self):
         """Test searching a file matching a pattern."""
-        actual_search_result = test_helper.TestHelper().run_kitty('-f', 'Mouse')
+        actual_search_result = test_helper.run_kitty('-f', 'Mouse')
         expected_search_result = ['./firstMouse.txt', './mousehole/secondMouse.txt']
 
         self.assertCountEqual(actual_search_result, expected_search_result) # pylint: disable=no-member
 
     def test_directory_search(self):
         """Test searching a directory matching a pattern."""
-        actual_search_result = test_helper.TestHelper().run_kitty('-d', 'hole')
+        actual_search_result = test_helper.run_kitty('-d', 'hole')
         expected_search_result = ['./mousehole']
 
         self.assertCountEqual(actual_search_result, expected_search_result) # pylint: disable=no-member
 
     def test_file_content_search(self):
         """Test searching a file content matching a pattern."""
-        actual_search_result = test_helper.TestHelper().run_kitty('-c', 'mouse')
+        actual_search_result = test_helper.run_kitty('-c', 'mouse')
         self.maxDiff = None # pylint: disable=invalid-name
         expected_search_result = ['./firstMouse.txt:1:This is the first mouse to catch.', '--', \
             './mousehole/secondMouse.txt:1:This is the second mouse to catch.']
